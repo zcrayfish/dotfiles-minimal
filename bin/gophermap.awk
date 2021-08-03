@@ -30,7 +30,16 @@ BEGIN {
 		url = substr(path, 5)
 		links = links sprintf("[%02d] %s\n",linknum, url)
 		linknum++
-	}
+	}	
+	        else if ( type == "w") # URL links supported by UMN gopher client, and libwww/HTGopher.c since ~'93
+        {
+                gsub(/^\[[0-9]+\][^ ]+? /,"",label)
+                printf("[%02d]", linknum)
+                printf(" %s\n", label)
+                url = path
+                links = links sprintf("[%02d] %s\n",linknum, url)
+                linknum++
+        }
 	else if ( type == "T") # telnet links
 	{
 		gsub(/^\[[0-9]+\][^ ]+? /,"",label)
